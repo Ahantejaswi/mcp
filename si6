@@ -1,0 +1,26 @@
+import numpy as np
+import matplotlib.pyplot as plt
+# First sequence
+x = [1, 2, 3, 4, 5]
+# Second sequence
+y = [2, 4, 6, 8, 10]
+# Perform cross-correlation
+cross_corr = np.correlate(x, y,
+mode='full')
+print('cross correlation',cross_corr)
+Perform auto-correlation
+auto_corr = np.correlate(x, x, mode='full')
+print('autocorrelation', auto_corr)
+lags = np.arange(-len(x) + 1, len(x))
+plt.stem(lags, cross_corr)
+plt.xlabel('Lag')
+plt.ylabel('Cross-Correlation')
+plt.title('Cross-Correlation of x and y')
+plt.grid(True)
+plt.show()
+plt.stem(lags, auto_corr)
+plt.xlabel('Lag')
+plt.ylabel('Auto-Correlation')
+plt.title('Auto-Correlation of x')
+plt.grid(True)
+plt.show()
