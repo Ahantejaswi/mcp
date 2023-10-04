@@ -32,4 +32,33 @@ h_padded= np.pad(h, (0, N-len(h), mode=’constant’)
 # Perform circular convolution using np.fft.ifft()
 X = np.fft.fft(x_padded)
 H = np.fft.fft(h_padded)
-Y = np.fft.ifft(X * H
+Y = np.fft.ifft(X * H)
+
+
+
+
+
+def lc(x,h):
+    l1=len(x)
+    l2=len(h)
+    l=l1+l2-1
+    result=[0]*l
+    for i in range(l1):
+        for j in range(l2):
+            result[i+j]+=x[i]*h[j]
+    return result;
+
+def cc(x,h):
+    l1=len(x)
+    l2=len(h)
+    N=max(l1,l2)
+    x_padded=x+[0]*(N-l1)
+    h_padded=h+[0]*(N-l2)
+    result=[0]*N
+    for n in range(N):
+        for k in range(N):
+            result[n]+=x_padded[k]*h_padded[(n-k)%N]
+    return result;
+x=[1,2,3,4,5]
+h=[1,2,1]
+print(cc(x,h))
