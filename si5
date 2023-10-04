@@ -1,3 +1,4 @@
+
 import numpy as np
 #impulse response
 h = [1,2,3,3,2,1];
